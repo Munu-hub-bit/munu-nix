@@ -142,7 +142,7 @@
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "swww-daemon"
-        "swww img ~/Pictures/wallpaper.png"
+        "swww img ~/Pictures/image.png"
         "sh -c 'sleep 2 && waybar'"
         "brave"
         "steam"
