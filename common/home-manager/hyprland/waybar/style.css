@@ -1,0 +1,149 @@
+/* =========================================================
+   COLOR PALETTE
+   ========================================================= */
+@define-color background  #1A171C;
+@define-color surface     #2A2430;
+@define-color accent      #C6A0F6;
+@define-color accent-soft #B7BDF8;
+@define-color text        #E9E0E8;
+@define-color subtext     #B3A9BA;
+@define-color warn        #ED8796;
+@define-color ok          #A6E3A1;
+
+/* =========================================================
+   GLOBAL DEFAULTS
+   ========================================================= */
+* {
+  font-family: "Inter Variable", "JetBrainsMono Nerd Font Propo", "Symbols Nerd Font", "Material Design Icons";
+  font-size: 10pt;
+  font-weight: 600;
+  color: @text;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: none;
+  border-radius: 6px;
+}
+
+/* =========================================================
+   BAR CONTAINER
+   ========================================================= */
+#waybar {
+  background: transparent;
+  margin: 0;
+}
+
+/* =========================================================
+   ⌗ MODULE STYLES (PILLS)
+   ========================================================= */
+/* Shared look for all active modules */
+#clock,
+#language,
+#wireplumber,
+#tray,
+#workspaces,
+#cpu,
+#memory,
+#custom-gpu,
+#custom-storage,
+#custom-storage-root,
+#custom-storage-home,
+#temperature,
+#backlight,
+#battery,
+#custom-power,
+#network,
+#bluetooth,
+#mpris,
+#custom-mic {
+  padding: 0 10px;
+  margin: 0 1px;
+  background: @surface;
+  border: 1.5px solid @accent-soft;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(198,160,246,0.25);
+  min-width: 0px; /* prevents GTK from reserving extra space */
+}
+
+/* =========================================================
+   HOVER EFFECTS
+   ========================================================= */
+#clock:hover,
+#wireplumber:hover,
+#tray:hover,
+#workspaces:hover,
+#cpu:hover,
+#memory:hover,
+#custom-gpu:hover,
+#custom-storage:hover,
+#custom-storage-root:hover,
+#custom-storage-home:hover,
+#temperature:hover,
+#backlight:hover,
+#battery:hover,
+#custom-power:hover,
+#network:hover,
+#bluetooth:hover,
+#mpris:hover,
+#custom-mic:hover {
+  border-color: @accent;
+  color: @accent;
+  transition: all 0.15s ease-in;
+}
+
+/* =========================================================
+   INDIVIDUAL MODULES
+   ========================================================= */
+
+/* ─────────────── Tray ─────────────── */
+#tray {
+  padding: 6px 8px;
+}
+#tray > .needs-attention {
+  background-color: @warn;
+  border-radius: 50%;
+}
+
+/* ─────────────── Workspaces ─────────────── */
+#workspaces {
+  padding: 0 4px;
+}
+#workspaces button {
+  padding: 0 6px;
+  color: @subtext;
+  background: transparent;
+  border: none;
+}
+#workspaces button.active,
+#workspaces button.focused {
+  color: @accent;
+  border-bottom: 2px solid @accent;
+}
+#workspaces button:hover {
+  color: @accent-soft;
+}
+
+/* ─────────────── Battery ─────────────── */
+#battery.good { color: @ok; }
+#battery.charging,
+#battery.full,
+#battery.plugged { color: @ok; }
+#battery.critical:not(.charging) {
+  color: @warn;
+  animation: blink 0.5s linear infinite alternate;
+}
+
+/* ─────────────── Power ─────────────── */
+#custom-power {
+  background: @surface;
+  border: 1.5px solid @accent;
+  color: @accent;
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+@keyframes blink {
+  to {
+    color: @accent;
+    background-color: rgba(198,160,246,0.2);
+  }
+}

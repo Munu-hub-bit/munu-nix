@@ -1,0 +1,194 @@
+// ────────────────────────────── Input ──────────────────────────────
+input {
+    keyboard {
+        xkb {
+            layout "us"
+            options "grp:alt_shift_toggle"
+        }
+        numlock
+    }
+
+    touchpad {
+        tap
+    }
+
+    mouse {
+        accel-profile "flat"
+        accel-speed 0.5
+    }
+}
+
+// ────────────────────────────── Layout & Appearance ──────────────────────────────
+layout {
+    gaps 8
+    center-focused-column "never"
+
+    focus-ring {
+        width 2
+        active-color "#988BA2"
+        inactive-color "#444444"
+    }
+
+    shadow {
+        on
+        softness 30
+        spread 5
+        offset x=0 y=5
+        color "#0007"
+    }
+
+    border {
+        off
+    }
+}
+
+animations {
+    slowdown 1.0
+}
+
+cursor {
+    xcursor-theme "Bibata-Modern-Classic"
+    xcursor-size 48
+}
+
+// ──────────────────────────── Environment ────────────────────────────
+environment {
+    XCURSOR_THEME "Bibata-Modern-Classic"
+    QT_CURSOR_THEME "Bibata-Modern-Classic"
+    GTK_CURSOR_THEME "Bibata-Modern-Classic"
+    GTK_THEME "adw-gtk3-dark"
+
+    CLUTTER_BACKEND "wayland"
+    QT_QPA_PLATFORMTHEME "qtct"
+
+    ELECTRON_OZONE_PLATFORM_HINT "wayland"
+    XDG_SESSION_TYPE "wayland"
+    XDG_CURRENT_DESKTOP "niri"
+    XDG_SESSION_DESKTOP "niri"
+}
+
+// ────────────────────────────── Startup ──────────────────────────────
+spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
+spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
+spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
+spawn-at-startup "mako"
+spawn-at-startup "swww-daemon"
+spawn-at-startup "sh" "-c" "sleep 0.5 && swww img $HOME/Pictures/wallpaper.png"
+spawn-at-startup "waybar"
+
+prefer-no-csd
+screenshot-path "~/Pictures/Screenshots/Screenshot %Y-%m-%d_%H-%M-%S.png"
+
+// ────────────────────────────── Rules ──────────────────────────────
+window-rule {
+    geometry-corner-radius 8
+    clip-to-geometry true
+}
+
+window-rule {
+    match app-id="firefox" title="^Picture-in-Picture$"
+    open-floating true
+}
+
+window-rule {
+    match app-id="mpv"
+    open-on-output "DP-3"
+    open-maximized false
+    default-column-width { proportion 1.0; }
+    default-window-height { proportion 0.4; }
+}
+
+window-rule {
+    match app-id="spotify"
+    open-on-output "DP-3"
+    default-column-width { proportion 1.0; }
+    default-window-height { proportion 0.35; }
+}
+
+window-rule {
+    match app-id="discord"
+    open-on-output "DP-3"
+    default-column-width { proportion 1.0; }
+    default-window-height { proportion 0.25; }
+}
+
+// ────────────────────────────── Binds ──────────────────────────────
+binds {
+    // --- Launchers ---
+    Mod+R { spawn "fuzzel"; }
+    Mod+T { spawn "kitty"; }
+    Mod+E { spawn "kitty" "-e" "yazi"; }
+    Mod+W { spawn "firefox"; }
+    Mod+V { spawn "sh" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
+    Mod+K { spawn "sh" "-c" "pkill waybar; waybar &"; }
+    Mod+L { spawn "swaylock"; }
+
+    // --- System / Power ---
+    Ctrl+Alt+Delete { spawn "wlogout" "-b" "5" "-T" "350" "-B" "350"; }
+    Mod+Shift+Q { quit; }
+
+    // --- Media / Volume ---
+    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    XF86AudioNext { spawn "playerctl" "next"; }
+    XF86AudioPrev { spawn "playerctl" "previous"; }
+    XF86AudioPlay { spawn "playerctl" "play-pause"; }
+    XF86MonBrightnessUp { spawn "brightnessctl" "set" "+10%"; }
+    XF86MonBrightnessDown { spawn "brightnessctl" "set" "10%-"; }
+
+    // --- Focus Navigation ---
+    Mod+Left { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    Mod+Down { focus-window-down; }
+    Mod+Up { focus-window-up; }
+
+    // --- Move windows/columns ---
+    Mod+Ctrl+H { move-column-left; }
+    Mod+Ctrl+L { move-column-right; }
+    Mod+Ctrl+J { move-window-down; }
+    Mod+Ctrl+K { move-window-up; }
+
+    // --- Workspaces ---
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+Ctrl+1 { move-column-to-workspace 1; }
+    Mod+Ctrl+2 { move-column-to-workspace 2; }
+    Mod+Ctrl+3 { move-column-to-workspace 3; }
+    Mod+Ctrl+4 { move-column-to-workspace 4; }
+    Mod+Ctrl+5 { move-column-to-workspace 5; }
+    Mod+Ctrl+6 { move-column-to-workspace 6; }
+    Mod+Ctrl+7 { move-column-to-workspace 7; }
+    Mod+Ctrl+8 { move-column-to-workspace 8; }
+
+    // --- Layout control ---
+    Mod+D { maximize-column; }
+    Mod+F { fullscreen-window; }
+    Mod+Space { toggle-window-floating; }
+
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+
+    Mod+C { center-column; }
+    Mod+Ctrl+C { center-visible-columns; }
+
+    Mod+Tab { toggle-overview; }
+
+    // --- Screenshots (Niri built-in) ---
+    Print { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
+
+    // --- Close ---
+    Mod+Q { close-window; }
+    Alt+F4 { close-window; }
+}

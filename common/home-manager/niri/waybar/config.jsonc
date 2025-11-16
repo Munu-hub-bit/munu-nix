@@ -1,0 +1,268 @@
+{
+  //========================================================
+  // GENERAL BAR SETTINGS
+  //========================================================
+  "layer": "bottom",
+  "position": "top",
+  "margin-top": 4,
+  "margin-bottom": 0,
+  "margin-left": 10,
+  "margin-right": 10,
+  "spacing": 4,
+
+  //========================================================
+  // MODULE PLACEMENT
+  //========================================================
+  "modules-left": [
+    "custom/power",
+    "backlight",
+    "cpu",
+    "memory",
+    "temperature",
+    "custom/gpu",
+    "custom/storage"
+    //"custom/storage-root"
+    //"custom/storage-home"
+  ],
+
+  "modules-center": [
+    "niri/workspaces"
+  ],
+  
+  "modules-right": [
+    "tray",
+    "mpris",
+    "custom/mic",
+    "wireplumber",
+    "clock#date"
+    //"network",
+    //"bluetooth"
+  ],
+
+  //========================================================
+  // MODULE DEFINITIONS
+  //========================================================
+
+  //----------------------------
+  // LEFT SIDE MODULES
+  //----------------------------
+
+  // Power button
+  "custom/power": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "wlogout",
+    "justify": "center"
+  },
+
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon}{percent}%",
+    "format-icons": [" "],
+    "on-scroll-down": "brightnessctl s 5%-",
+    "on-scroll-up": "brightnessctl s +5%",
+    "justify": "center",
+    "tooltip": false
+  },
+
+  // Storage monitor ALL
+  "custom/storage": {
+    "format": "",
+    "return-type": "json",
+    "interval": 30,
+    "tooltip": true,
+    "exec": "df -h -P -l | awk 'BEGIN { printf \"{\\\"text\\\":\\\"\\\", \\\"tooltip\\\":\\\"\" } NR>1 && $1!~/tmpfs|udev/ && $6!~/snap/ && $6!=\"/boot\" && $6!=\"/boot/efi\" && $6!~/^\\/sys/ && $6!~/^\\/proc/ && $6!~/^\\/run/ { gsub(/\\\\/, \"\\\\\\\\\", $0); gsub(/\\\"/, \"\\\\\\\"\", $0); printf $6 \"  \" $3 \"/\" $2 \"  (\" $5 \")\\\\n\" } END { printf \"\\\"}\" }'"
+  },
+
+  // Storage monitor Root
+  "custom/storage-root": {
+    "format": " {percentage}%",
+    "format-alt": " {}GB",
+    "format-alt-click": "click",
+    "return-type": "json",
+    "interval": 60,
+    "exec": "mount='/' ; warning=20 ; critical=10 ; df -h -P -l \"$mount\" | awk -v warning=$warning -v critical=$critical '/\\/.*/ { used=$3; total=$2; used_num=$3; total_num=$2; gsub(/[^0-9.]/, \"\", used_num); gsub(/[^0-9.]/, \"\", total_num); text=used_num \"/\" total_num; tooltip=\"/ROOT\"; use=$5; exit 0 } END { class=\"\"; gsub(/%$/, \"\", use); if ((100 - use) < critical) { class=\"critical\" } else if ((100 - use) < warning) { class=\"warning\" } print \"{\\\"text\\\":\\\"\" text \"\\\", \\\"percentage\\\":\" use \",\\\"tooltip\\\":\\\"\" tooltip \"\\\", \\\"class\\\":\\\"\" class \"\\\"}\" }'",
+    "tooltip": true
+  },
+
+
+  // Storage monitor Home
+  "custom/storage-home": {
+    "format": " {percentage}%",
+    "format-alt": " {}GB",
+    "format-alt-click": "click",
+    "return-type": "json",
+    "interval": 60,
+    "exec": "mount='/home' ; warning=20 ; critical=10 ; df -h -P -l \"$mount\" | awk -v warning=$warning -v critical=$critical '/\\/.*/ { used=$3; total=$2; used_num=$3; total_num=$2; gsub(/[^0-9.]/, \"\", used_num); gsub(/[^0-9.]/, \"\", total_num); text=used_num \"/\" total_num; tooltip=\"/HOME\"; use=$5; exit 0 } END { class=\"\"; gsub(/%$/, \"\", use); if ((100 - use) < critical) { class=\"critical\" } else if ((100 - use) < warning) { class=\"warning\" } print \"{\\\"text\\\":\\\"\" text \"\\\", \\\"percentage\\\":\" use \",\\\"tooltip\\\":\\\"\" tooltip \"\\\", \\\"class\\\":\\\"\" class \"\\\"}\" }'",
+    "tooltip": true
+  },
+
+  // CPU usage and frequency
+  "cpu": {
+    "format": " {usage}%",
+    "interval": 3,
+    "justify": "center",
+    "tooltip": false
+  },
+
+  // Memory usage
+  "memory": {
+    "format": " {used:0.1f} GB",
+    "interval": 1,
+    "justify": "center",
+    "tooltip": false
+  },
+
+  // Temperature sensor
+  "temperature": {
+    "interval": 3,
+    "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+    "input-filename": "temp1_input",
+    "critical-threshold": 80,
+    "format": " {temperatureC}°C",
+    "format-critical": "  {temperatureC}°C",
+    "tooltip": false
+  },
+
+  // GPU temperature (custom)
+  "custom/gpu": {
+    "exec": "sh -c 'h=$(grep -l amdgpu /sys/class/hwmon/hwmon*/name | sed \"s/\\/name//\"); v=$(cat \"$h/temp1_input\" 2>/dev/null); [ -z \"$v\" ] && v=0; echo $((v/1000))'",
+    "interval": 2,
+    "format": "󰢮 {}°C",
+    "tooltip": false
+  },
+
+  //----------------------------
+  // CENTER MODULES
+  //----------------------------
+
+  // Niri workspace indicators
+  "niri/workspaces": {
+    "all-outputs": false,
+    "format": "{value}",
+    "sort-by-number": true,
+    "active-only": false,
+    "justify": "center",
+    "on-scroll-up": "niri msg action focus-workspace next",
+    "on-scroll-down": "niri msg action focus-workspace prev"
+  },
+
+  //----------------------------
+  // RIGHT SIDE MODULES
+  //----------------------------
+
+  // System tray
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10,
+  },
+
+  // Media player info (MPRIS)
+  "mpris": {
+    "format": "{player_icon} {player}",
+    "format-paused": "{status_icon} {player}",
+    "player-icons": {
+      "default": ""
+    },
+    "status-icons": {
+      "paused": ""
+    },
+    "ignored-players": ["mpv"]
+  },
+
+  // Microphone mute indicator
+  "custom/mic": {
+    "exec": "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -q MUTED && echo '<span foreground=\"#fab387\"></span>' || echo '<span foreground=\"#a6e3a1\"></span>'",
+    "interval": 2,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "return-type": "string",
+    "tooltip": false,
+    "justify": "center"
+  },
+
+  // Audio volume control (WirePlumber)
+  "wireplumber": {
+    "on-click": "pavucontrol",
+    "on-click-right": "amixer sset Master toggle 1>/dev/null",
+    "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 0.05-",
+    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 0.05+",
+    "format": "{icon} {volume}%",
+    "format-icons": ["", "", "", ""],
+    "format-muted": "<span foreground='#fab387'> MUT</span>",
+    "tooltip": false,
+    "justify": "center"
+  },
+
+  // Clock + calendar
+  "clock#date": {
+    "format": " {:%d-%m %a |  %H:%M}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#eebebe'><b>{}</b></span>",
+        "days": "<span color='#ffe6ff'><b>{}</b></span>",
+        "weeks": "<span color='#c6a0f6'><b>W{}</b></span>",
+        "weekdays": "<span color='#eebebe'><b>{}</b></span>",
+        "today": "<span color='#ed8796'><b><u>{}</u></b></span>"
+      }
+    },
+    "justify": "center"
+  },
+
+  //----------------------------
+  // OPTIONAL / COMMENTED MODULES
+  //----------------------------
+
+  // Network manager
+  "network": {
+    "interval": 5,
+    "format-wifi": "󰖩 {essid}",
+    "format-ethernet": "󰈀 {ifname}",
+    "format-disconnected": "󰤮",
+    "tooltip": true,
+    "tooltip-format": "{ifname}\n{ipaddr}",
+    "on-click": "nm-connection-editor",
+    "on-click-right": "nm-applet",
+    "max-length": 25
+  },
+
+  // Bluetooth manager
+  "bluetooth": {
+    "format": "󰂯 {status}",
+    "format-connected": "󰂯 {device_alias}",
+    "format-off": "󰂲 off",
+    "tooltip": true,
+    "on-click": "blueman-manager",
+    "on-click-right": "blueman-applet"
+  },
+
+  
+  //----------------------------
+  // MISCELLANEOUS MODULES (unused or extra)
+  //----------------------------
+
+  // Language indicator (not in current layout)
+  "hyprland/language": {
+    "format": "{short}"
+  },
+
+
+  // Battery status (not in layout)
+  "battery": {
+    "interval": 30,
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "󰂄 {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰂄 {capacity}%",
+    "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
+    "justify": "center"
+  }
+}
