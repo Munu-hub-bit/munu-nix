@@ -1,4 +1,4 @@
-
+{
   "nodes": {
     "home-manager": {
       "inputs": {
@@ -77,4 +77,3 @@
   "root": "root",
   "version": 7
 }
-
