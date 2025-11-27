@@ -30,4 +30,7 @@
     max-jobs = 1;
     cores = 10;
   };
+  # Enable CPU temperature sensors
+  hardware.sensors.enable = true;
+  hardware.sensors.packages = [ pkgs.lm_sensors ];
 }
