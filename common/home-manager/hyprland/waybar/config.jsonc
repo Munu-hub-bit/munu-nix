@@ -115,7 +115,7 @@
   // Temperature sensor
   "temperature": {
     "interval": 3,
-    "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+   "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
     "input-filename": "temp1_input",
     "critical-threshold": 80,
     "format": " {temperatureC}°C",
