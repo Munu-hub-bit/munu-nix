@@ -179,6 +179,8 @@
     "browser.tabs.unloadOnLowMemory" = true;
     "browser.tabs.unloadTabInContextMenu" = true;
     "widget.use-xdg-desktop-portal.file-picker" = 1;
+    "gfx.webrender.layer-compositor" = true;
+    "media.wmf.zero-copy-nv12-textures-force-enabled" = true;
      };
 
      # ---- POLICIES ----
@@ -205,13 +207,19 @@
                 Method = "GET";
                 Description = "SearXNG Search";
             }
+
+            {
+                Name = "Brave";
+                URLTemplate = "https://search.brave.com/search?q={searchTerms}";
+                Method = "GET";
+                Description = "Brave";
+            }
         ];
         Remove = [
             "Bing"
-            "DuckDuckGo"
             "Wikipedia"
         ];
-        Default = "SearXNG";
+        Default = "Brave";
     };
 
 
@@ -254,4 +262,3 @@
   };
 };
 }
-
