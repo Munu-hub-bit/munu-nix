@@ -144,7 +144,7 @@
         "swww-daemon"
         "swww img ~/Pictures/image.png"
         "sh -c 'sleep 2 && waybar'"
-        "brave"
+        "firefox"
         "steam"
         "discord"
       ];
