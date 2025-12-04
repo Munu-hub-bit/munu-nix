@@ -219,7 +219,7 @@
             "Bing"
             "Wikipedia"
         ];
-        Default = "Brave";
+        Default = "SearXNG";
     };
 
 
