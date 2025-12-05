@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  services.flatpak.enable = true;
   environment.systemPackages = with pkgs; [
     # Networking Tools
     wget
