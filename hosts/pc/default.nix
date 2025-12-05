@@ -5,7 +5,6 @@
     ./hardware-configuration.nix
 
     ./software/apps.nix
-    ./software/flatpaks.nix
     ./software/gaming.nix
     ./software/vms.nix
 
