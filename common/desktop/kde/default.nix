@@ -3,6 +3,6 @@
 {
     imports = [
         ./kde.nix
-        ./login/greetd.nix
+        ./login/sddm.nix
     ];
 }
