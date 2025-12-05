@@ -18,7 +18,7 @@
   inputs = {
     # ── Nixpkgs ──────────────────────────────────────────────────────────────
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url   = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-stable.url   = "github:nixos/nixpkgs/nixos-25.11";
 
     # ── Home Manager ────────────────────────────────────────────────────────
     home-manager.url = "github:nix-community/home-manager";
@@ -51,7 +51,7 @@
       };
 
       # ──────────────────────────────── TOSHIBA ─────────────────────────────
-      toshiba = nixpkgs-unstable.lib.nixosSystem {
+      toshiba = nixpkgs-stable.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           inherit inputs;
