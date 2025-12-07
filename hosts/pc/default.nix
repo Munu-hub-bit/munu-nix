@@ -15,7 +15,7 @@
     ./hardware/nvidia.nix
 
 
-    ../../common/desktop/hyprland/default.nix
+    ../../common/desktop/kde/default.nix
   ];
 
   # Attach PC-specific Home Manager files
