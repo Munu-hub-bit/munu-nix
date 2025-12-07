@@ -15,7 +15,7 @@
     ./hardware/nvidia.nix
 
 
-    ../../common/desktop/kde/default.nix
+    ../../common/desktop/gnome/default.nix
   ];
 
   # Attach PC-specific Home Manager files
