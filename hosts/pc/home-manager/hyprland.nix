@@ -7,7 +7,7 @@
   wayland.windowManager.hyprland.extraConfig = ''
     # ──────── Monitor layout ────────
     monitor = DP-1,2560x1440@180,0x0,1
-    monitor = HDMI-A-1,1920x1080@60,-1920x0,1
+    monitor = HDMI-A-1,1920x1200@60,-1920x0,1
 
     # ───── Workspaces ─────
     # Monitor 1: HDMI-A-1 → workspaces 1-5
