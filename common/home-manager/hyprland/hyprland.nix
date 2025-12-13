@@ -17,7 +17,7 @@
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$filemanager" = "nemo";
-      "$menu" = "fuzzel";
+      "$menu" = "sh -c 'noctalia-shell ipc call launcher toggle || fuzzel'";
 
       #### Environment
       env = [
@@ -144,7 +144,7 @@
       exec-once = [
         "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "nm-applet &"
-        "blueman-applet &"
+        "noctalia-shell"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "swww-daemon"
