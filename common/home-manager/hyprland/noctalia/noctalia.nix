@@ -66,6 +66,36 @@
               showNetworkStats = false;
               usePrimaryColor = false;
             }
+            {
+              id = "CustomButton";
+              icon = "temperature";
+              hideMode = "alwaysExpanded";
+              showIcon = true;
+              textCommand = ''
+                sh -c 'v=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits 2>/dev/null | head -n1); echo "GPU: ${v}°C"'
+              '';
+              textIntervalMs = 3000;
+              textStream = false;
+              parseJson = false;
+              textCollapse = "";
+              maxTextLength = {
+                horizontal = 10;
+                vertical = 10;
+              };
+              leftClickExec = "";
+              leftClickUpdateText = false;
+              middleClickExec = "";
+              middleClickUpdateText = false;
+              rightClickExec = "";
+              rightClickUpdateText = false;
+              wheelMode = "unified";
+              wheelExec = "";
+              wheelUpdateText = false;
+              wheelUpExec = "";
+              wheelUpUpdateText = false;
+              wheelDownExec = "";
+              wheelDownUpdateText = false;
+            }
           ];
 
           center = [
