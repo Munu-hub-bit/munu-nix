@@ -76,7 +76,7 @@
               hideMode = "alwaysExpanded";
               showIcon = true;
               textCommand = ''
-                sh -c 'v=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits 2>/dev/null | head -n1); echo "GPU: ${v}°C"'
+                sh -c 'v=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits 2>/dev/null | head -n1); echo "GPU: $v°C"'
               '';
               textIntervalMs = 3000;
               textStream = false;
