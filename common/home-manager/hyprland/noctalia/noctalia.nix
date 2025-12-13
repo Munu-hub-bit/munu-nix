@@ -186,7 +186,7 @@
       };
 
       location = {
-        name = "Bucharest, Romania";
+        name = "Timisoara, Romania";
         weatherEnabled = true;
         weatherShowEffects = true;
         showCalendarEvents = true;
