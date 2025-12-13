@@ -59,7 +59,6 @@
     wf-recorder 
     wlogout 
     swww
-    fuzzel 
     alacritty 
     foot 
     mpv 
