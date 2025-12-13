@@ -265,4 +265,18 @@
       };
     };
   };
+
+  systemd.user.services.noctalia-shell = {
+    Service = {
+      Restart = "on-failure";
+      RestartSec = "2s";
+
+      # prevent restart storm lockout
+      StartLimitIntervalSec = "0";
+
+      # allow clean shutdown on rebuild/logout
+      TimeoutStopSec = "2s";
+    };
+  };
+
 }
