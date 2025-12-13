@@ -13,12 +13,7 @@
     sourceFirst = true;
     systemd = {
       enable = true;
-      variables = [
-        "DISPLAY"
-        "WAYLAND_DISPLAY"
-        "HYPRLAND_INSTANCE_SIGNATURE"
-        "XDG_CURRENT_DESKTOP"
-      ];
+      variables = [ "--all" ];
     };
 
     settings = {
