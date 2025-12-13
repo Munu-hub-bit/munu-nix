@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  programs.hyprshot = {
+    enable = true;
+    package = pkgs.hyprshot;
+    saveLocation = "$HOME/Pictures/Screenshots";
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     package = null; # use system hyprland
