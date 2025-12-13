@@ -11,6 +11,15 @@
     enable = true;
     package = null; # use system hyprland
     sourceFirst = true;
+    systemd = {
+      enable = true;
+      variables = [
+        "DISPLAY"
+        "WAYLAND_DISPLAY"
+        "HYPRLAND_INSTANCE_SIGNATURE"
+        "XDG_CURRENT_DESKTOP"
+      ];
+    };
 
     settings = {
       #### Variables
@@ -142,9 +151,7 @@
 
       #### Autostart
       exec-once = [
-        "dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "nm-applet &"
-        "noctalia-shell"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "swww-daemon"
