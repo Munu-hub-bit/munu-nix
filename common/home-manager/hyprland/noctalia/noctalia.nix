@@ -31,6 +31,10 @@
         mprisBlacklist = [ ];
       };
 
+      dock = {
+        enabled = false;
+      };
+
       bar = {
         position = "top";
         density = "default";
