@@ -118,20 +118,18 @@
           right = [
             {
               id = "MediaMini";
-              hideMode = "hidden";
+              hideMode = "visible";
               hideWhenIdle = false;
-              maxWidth = 145;
+              maxWidth = 200;
               scrollingMode = "hover";
-              showAlbumArt = false;
+              showAlbumArt = true;
               showArtistFirst = true;
               showProgressRing = true;
-              showVisualizer = false;
+              showVisualizer = true;
               useFixedWidth = false;
-              visualizerType = "linear";
+              visualizerType = "wave";
             }
-            { id = "Microphone"; displayMode = "onhover"; }
-            { id = "Volume"; displayMode = "onhover"; }
-            { id = "Spacer"; width = 3; }
+            { id = "Spacer"; width = 2; }
             {
               id = "Tray";
               hidePassive = true;
@@ -140,8 +138,11 @@
               blacklist = [ "nm-applet" "blueman*" ];
               pinned = [ ];
             }
-            { id = "WiFi"; displayMode = "onhover"; }
+            { id = "Spacer"; width = 2; }
+            { id = "Microphone"; displayMode = "onhover"; }
+            { id = "Volume"; displayMode = "onhover"; }
             { id = "Bluetooth"; displayMode = "onhover"; }
+            { id = "WiFi"; displayMode = "onhover"; }
             {
               id = "Clock";
               formatHorizontal = "HH:mm\ndd.MM.yyyy";
@@ -151,6 +152,7 @@
               customFont = "";
             }
           ];
+
         };
       };
 
