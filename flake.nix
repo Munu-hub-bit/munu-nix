@@ -22,6 +22,12 @@
 
     # ── Home Manager ────────────────────────────────────────────────────────
     home-manager.url = "github:nix-community/home-manager";
+
+    # ── Noctalia ────────────────────────────────────────────────────────────
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = { self, nixpkgs-unstable, nixpkgs-stable, home-manager, ... }@inputs: {
