@@ -12,7 +12,7 @@
         monitor = "HDMI-A-1";
 
         wallpaperId =
-          "/mnt/extras/SteamLibrary/steamapps/workshop/content/431960/3600029179";
+          "/mnt/extras/SteamLibrary/steamapps/workshop/content/431960/3600653235";
 
         fps = 60;
 
