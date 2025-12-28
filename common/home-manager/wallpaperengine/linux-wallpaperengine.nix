@@ -27,7 +27,7 @@
         monitor = "DP-1";
 
         wallpaperId =
-          "/mnt/extras/SteamLibrary/steamapps/workshop/content/431960/3445942378";
+          "/mnt/extras/SteamLibrary/steamapps/workshop/content/431960/3536608741";
       }
     ];
   };
