@@ -14,7 +14,7 @@
         wallpaperId =
           "/mnt/extras/SteamLibrary/steamapps/workshop/content/431960/3420616562";
 
-        fps = 60;
+        fps = 30;
 
         audio = {
           silent = true;
@@ -27,7 +27,7 @@
         monitor = "DP-1";
 
         wallpaperId =
-          "/mnt/extras/SteamLibrary/steamapps/workshop/content/431960/3100052627";
+          "/mnt/extras/SteamLibrary/steamapps/workshop/content/431960/3536608741";
       }
     ];
   };
