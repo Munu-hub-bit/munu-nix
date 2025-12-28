@@ -14,5 +14,6 @@
     ./vim/neovim.nix
     ./terminal/fish.nix
     ./terminal/starship.nix
+    ./wallpaperengine/linux-wallpaperengine.nix
   ];
 }
