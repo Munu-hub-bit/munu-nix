@@ -252,17 +252,6 @@
         panelBackgroundOpacity = 1;
       };
 
-      wallpaper = {
-        enabled = true;
-        directory = "${config.home.homeDirectory}/Pictures/";
-        fillMode = "crop";
-        fillColor = "#000000";
-        setWallpaperOnAllMonitors = true;
-        transitionType = "random";
-        transitionDuration = 1500;
-        transitionEdgeSmoothness = 0.05;
-        randomEnabled = false;
-      };
     };
   };
 
